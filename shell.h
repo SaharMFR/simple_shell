@@ -37,11 +37,18 @@ typedef struct SLL
  * @argc: The number of elements in 'argv'.
  * @env: The local copy of environ (linked list).
  * @environ: The modified copy of environ using 'env' linked list.
+ * @changed_env: If environment was changed.
  * @path: The path for the current command.
  * @nLine: The number of the line being executed to use in printing error.
  * @errNum: The number (code) to know the error.
+ * @fileName: The file name of the program.
  * @inputLine: The number of input lines.
  * @status: The status returned from the last command.
+ * @history: The history node of the current node.
+ * @nHistory: The number of history lines.
+ * @alias: The alias node.
+ * @cmd_buf: The address of the pointer to cmd_buf (in chaining).
+ * @cmd_type: The cmd buffer type.
  * @readfd: The file descriptor to read input line from.
  */
 typedef struct shellinfo
@@ -51,16 +58,34 @@ typedef struct shellinfo
 	int argc;
 	list_t *env;
 	char **environ;
+	int changed_env;
 	char *path;
 	unsigned int nLine;
 	int errNum;
+	char *fileName;
 	int inputLine;
 	int status;
+	list_t *history;
+	int nHistory;
+	list_t *alias;
+	char **cmd_buf;
+	int cmd_type;
 	int readfd;
 } info_t
 
 #define SHELL_INIT \
-{NULL, NULL, 0, NULL, NULL, NULL, 0, 0, 0, 0, 0}
+{NULL, NULL, 0, NULL, NULL, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, NULL, NULL, 0, 0}
+
+/**
+ * struct builtin - Contains pairs of functions and matching command.
+ * @command: The string command.
+ * @fun: The function to be executed.
+ */
+typedef struct builtin
+{
+	char *command;
+	int (*fun)(info_t *);
+} builtin_table;
 
 int shellLoop(info_t *info, char **argv);
 
