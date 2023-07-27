@@ -33,10 +33,10 @@ int _myenv(info_t *info)
 }
 
 /**
- * _mysetenv - Initializes a new variable of environment
- *             or modify it (if it is exists).
+ * _mysetenv - Initializes a new variable of environment.
+ *	or modify it (if it is exists).
  * @info: The passed informaiotn about the shell.
- *  Return: 0.
+ * Return: 0.
  */
 int _mysetenv(info_t *info)
 {
