@@ -71,6 +71,8 @@ typedef struct shellinfo
 	int readfd;
 } info_t;
 
+#define SHELL_INIT \
+{NULL, NULL, 0, NULL, NULL, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, NULL, NULL, 0, 0}
 
 /**
  * struct builtin - Contains pairs of functions and matching command.
@@ -82,6 +84,7 @@ typedef struct builtin
 	char *command;
 	int (*fun)(info_t *);
 } builtin_table;
+
 
 int shellLoop(info_t *info, char **argv);
 int find_builtin(info_t *info);

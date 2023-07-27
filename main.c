@@ -9,8 +9,7 @@
 
 int main(int ac, char **av)
 {
-	info_t info[] = {NULL, NULL, 0, NULL, NULL, 0, NULL, 0, 0,
-		NULL, 0, 0, NULL, 0, NULL, NULL, 0, 0};
+	info_t info[] = { SHELL_INIT };
 	int fd = 2;
 
 	if (ac == 2)
