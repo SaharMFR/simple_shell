@@ -27,12 +27,12 @@ int _eputchar(char c)
 	static int i;
 	static char buf[1024];
 
-	if (c == BUF_FLUSH || i >= 1024)
+	if (c == -1 || i >= 1024)
 	{
 		write(2, buf, i);
 		i = 0;
 	}
-	if (c != BUF_FLUSH)
+	if (c != -1)
 		buf[i++] = c;
 	return (1);
 }
@@ -72,9 +72,9 @@ int _erratoi(char *str)
  */
 void print_error(info_t *info, char *estr)
 {
-	_eputs(info->fname);
+	_eputs(info->fileName);
 	_eputs(": ");
-	print_d(info->line_count, STDERR_FILENO);
+	print_d(info->nLine, STDERR_FILENO);
 	_eputs(": ");
 	_eputs(info->argv[0]);
 	_eputs(": ");

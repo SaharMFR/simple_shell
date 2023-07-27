@@ -12,8 +12,6 @@
 #include <errno.h>
 #include <limits>
 
-#define BUF_FLUSH -1
-
 extern char **environ;
 
 /**
@@ -71,10 +69,10 @@ typedef struct shellinfo
 	char **cmd_buf;
 	int cmd_type;
 	int readfd;
-} info_t
+} info_t;
 
 #define SHELL_INIT \
-{NULL, NULL, 0, NULL, NULL, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, NULL, NULL, 0, 0}
+{NULL, NULL, 0, NULL, NULL, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, NULL, NULL, 0, 0};
 
 /**
  * struct builtin - Contains pairs of functions and matching command.
@@ -88,6 +86,9 @@ typedef struct builtin
 } builtin_table;
 
 int shellLoop(info_t *info, char **argv);
+int find_builtin(info_t *info);
+void find_cmd(info_t *info);
+void fork_cmd(info_t *info);
 
 char *_strcpy(char *destination, char *source);
 char *_strdup(const char *str);
@@ -99,16 +100,24 @@ int _strcmp(char *str1, char *str2);
 char *starts_with(const char *str, const char *toFind);
 char *_strcat(char *destination, char *source);
 
-int _atoi(char *str)
 int interactive(info_t *info);
+int is_delim(char c, char *delim);
+int _isalpha(int character);
+int _atoi(char *str);
 
 void _eputs(char *str);
 int _eputchar(char c);
-
 int _erratoi(char *str);
 void print_error(info_t *info, char *error);
 int print_d(int input, int fd);
 
+int _putfd(char c, int fd);
+int _putsfd(char *str, int fd);
+char *convert_number(long int num, int base, int flags);
+void remove_comments(char *buffer);
+
+int is_cmd(info_t *info, char *path);
+char *dup_chars(char *Path, int start, int stop);
 char *find_path(info_t *info, char *Path, char *cmd);
 
 void clear_info(info_t *info);
@@ -120,6 +129,16 @@ int _myenv(info_t *info);
 int _mysetenv(info_t *info);
 int _myunsetenv(info_t *info);
 int populate_env_list(info_t *info);
+
+char **get_environ(info_t *info);
+int _unsetenv(info_t *info, char *var);
+int _setenv(info_t *info, char *var, char *value);
+
+char *get_history_file(info_t *info);
+int write_history(info_t *info);
+int read_history(info_t *info);
+int build_history_list(info_t *info, char *buf, int nLine);
+int renumber_history(info_t *info);
 
 list_t *add_node(list_t **head, const char *str, int num);
 list_t *add_node_end(list_t **head, const char *str, int num);
@@ -133,12 +152,34 @@ size_t print_list(const list_t *head);
 list_t *node_starts_with(list_t *node, char *prefix, char c);
 ssize_t get_node_index(list_t *head, list_t *node);
 
+char *_Estrcpy(char *destination, char *source, int n);
+char *_Estrcat(char *destination, char *source, int n);
+char *_Estrchr(char *str, char c);
+
 char *_memset(char *ptr, char Byte, unsigned int n);
 void ffree(char **pptr);
 void *_realloc(void *ptr, unsigned int oldSize, unsigned int newSize);
 
 int bfree(void **ptr);
 
-}
+char **strtoken(char *str, char *delim);
+char **strtoken1(char *str, char delim);
+
+int _myexit(info_t *info);
+int _mycd(info_t *info);
+int _myhelp(info_t *info);
+int _myhistory(info_t *info);
+int _myalias(info_t *info);
+
+ssize_t get_input(info_t *info);
+int _getline(info_t *info, char **ptr, size_t *length);
+void sigintHandler(__attribute__((unused))int sig_num);
+
+int is_chain(info_t *info, char *buffer, size_t *pos);
+void check_chain(info_t *info, char *buffer, size_t *pos, size_t start, size_t len);
+int replace_alias(info_t *info);
+int replace_vars(info_t *info);
+int replace_string(char **old, char *New);
+
 
 #endif
