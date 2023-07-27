@@ -1,9 +1,9 @@
 #include "shell.h"
 
 /**
- * get_history_file - gets the history file.
+ * get_history_file - Gets the history file.
  * @info: The passed information about the shell.
- * Return: allocated string containg history file.
+ * Return: The allocated string containg history file.
  */
 
 char *get_history_file(info_t *info)
@@ -13,7 +13,8 @@ char *get_history_file(info_t *info)
 	dir = _getenv(info, "HOME=");
 	if (!dir)
 		return (NULL);
-	buf = malloc(sizeof(char) * (_strlen(dir) + _strlen(".simple_shell_history") + 2));
+	buf = malloc(sizeof(char) * (_strlen(dir)
+				+ _strlen(".simple_shell_history") + 2));
 	if (!buf)
 		return (NULL);
 	buf[0] = 0;
