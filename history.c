@@ -1,10 +1,9 @@
 #include "shell.h"
 
 /**
- * get_history_file - gets the history file
- * @info: parameter struct
- *
- * Return: allocated string containg history file
+ * get_history_file - gets the history file.
+ * @info: The passed information about the shell.
+ * Return: allocated string containg history file.
  */
 
 char *get_history_file(info_t *info)
@@ -135,5 +134,5 @@ int renumber_history(info_t *info)
 		node->nNodes = i++;
 		node = node->next;
 	}
-	return (info->nHitory = i);
+	return (info->nHistory = i);
 }

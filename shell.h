@@ -72,7 +72,7 @@ typedef struct shellinfo
 } info_t;
 
 #define SHELL_INIT \
-{NULL, NULL, 0, NULL, NULL, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, NULL, NULL, 0, 0};
+{NULL, NULL, 0, NULL, NULL, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, NULL, NULL, 0, 0}
 
 /**
  * struct builtin - Contains pairs of functions and matching command.

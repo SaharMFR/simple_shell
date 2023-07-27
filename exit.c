@@ -1,11 +1,11 @@
 #include "shell.h"
 
 /**
- **_Estrncpy - Copies a string.
- *@destination: the destination string to be copied to.
- *@source: the source string.
- *@n: the amount of characters to be copied.
- *Return: the concatenated string.
+ * _Estrcpy - Copies a string.
+ * @destination: the destination string to be copied to.
+ * @source: the source string.
+ * @n: the amount of characters to be copied.
+ * Return: the concatenated string.
  */
 char *_Estrcpy(char *destination, char *source, int n)
 {
@@ -31,13 +31,13 @@ char *_Estrcpy(char *destination, char *source, int n)
 }
 
 /**
- **_strncat - concatenates two strings
- *@destination: the first string
- *@source: the second string
- *@n: the amount of bytes to be maximally used
- *Return: the concatenated string
+ * _Estrcat - concatenates two strings
+ * @destination: the first string
+ * @source: the second string
+ * @n: the amount of bytes to be maximally used
+ * Return: the concatenated string
  */
-char *_strncat(char *destination, char *source, int n)
+char *_Estrcat(char *destination, char *source, int n)
 {
 	int i, j;
 	char *s = destination;
@@ -58,12 +58,12 @@ char *_strncat(char *destination, char *source, int n)
 }
 
 /**
- **_strchr - locates a character in a string
- *@str: the string to be parsed
- *@c: the character to look for
- *Return: (str) a pointer to the memory area s
+ * _Estrchr - locates a character in a string
+ * @str: the string to be parsed
+ * @c: the character to look for
+ * Return: (str) a pointer to the memory area s
  */
-char *_strchr(char *str, char c)
+char *_Estrchr(char *str, char c)
 {
 	do {
 		if (*str == c)
