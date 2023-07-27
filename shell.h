@@ -71,8 +71,6 @@ typedef struct shellinfo
 	int readfd;
 } info_t;
 
-#define SHELL_INIT \
-{NULL, NULL, 0, NULL, NULL, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, NULL, NULL, 0, 0}
 
 /**
  * struct builtin - Contains pairs of functions and matching command.
@@ -171,12 +169,15 @@ int _myhelp(info_t *info);
 int _myhistory(info_t *info);
 int _myalias(info_t *info);
 
+ssize_t input_buf(info_t *info, char **buf, size_t *len);
 ssize_t get_input(info_t *info);
+ssize_t read_buf(info_t *info, char *buf, size_t *i);
 int _getline(info_t *info, char **ptr, size_t *length);
 void sigintHandler(__attribute__((unused))int sig_num);
 
 int is_chain(info_t *info, char *buffer, size_t *pos);
-void check_chain(info_t *info, char *buffer, size_t *pos, size_t start, size_t len);
+void check_chain(info_t *info, char *buffer, size_t *pos,
+		size_t start, size_t len);
 int replace_alias(info_t *info);
 int replace_vars(info_t *info);
 int replace_string(char **old, char *New);
