@@ -39,7 +39,7 @@ int _eputchar(char c)
 
 /**
  * _erratoi - Converts a string to integer.
- * @s: The string to be converted.
+ * @str: The string to be converted.
  * Return: Converted number, 0 if no numbers in the string,
  *       -1 on failure.
  */
@@ -70,7 +70,7 @@ int _erratoi(char *str)
  * @info: The passed information about the shell.
  * @error: The error (specific type).
  */
-void print_error(info_t *info, char *estr)
+void print_error(info_t *info, char *error)
 {
 	_eputs(info->fileName);
 	_eputs(": ");
@@ -78,7 +78,7 @@ void print_error(info_t *info, char *estr)
 	_eputs(": ");
 	_eputs(info->argv[0]);
 	_eputs(": ");
-	_eputs(estr);
+	_eputs(error);
 }
 
 /**
